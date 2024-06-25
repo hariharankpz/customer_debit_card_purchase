@@ -3,6 +3,7 @@ import random
 import datetime
 import boto3
 import os
+from create_rds_schema import connect_and_create_db
 
 # Initialize the S3 client
 s3_client = boto3.client('s3')
@@ -75,14 +76,23 @@ def lambda_handler(event, context):
     
     # Generate data for the next date
     generate_mock_data_for_day(num_records_per_day, date_str, bucket_name)
+    print("Mock data generated succesfully")
     
     # Update the last generated date
     update_last_generated_date(bucket_name, metadata_key, next_date)
+
+    print("Updated last generated data")
+
+    # Connect to RDS, create customers database and customer_transactions table
+    # try:
+    #     connect_and_create_db()
+    # except Exception as e:
+    #     print("Exception occurs while connect_and_create_db :",str(e))
     
-    return {
-        'statusCode': 200,
-        'body': f'Mock data for {date_str} generated and uploaded to S3 successfully'
-    }
+    # return {
+    #     'statusCode': 200,
+    #     'body': f'Mock data for {date_str} generated and uploaded to S3 successfully'
+    # }
 
 # # Example event and context for local testing
 # if __name__ == "__main__":
