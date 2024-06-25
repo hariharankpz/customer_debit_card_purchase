@@ -19,7 +19,7 @@ generate_debit_card_type = lambda: random.choice(['Visa', 'MasterCard', 'Discove
 
 # Function to generate mock data and save to CSV
 def generate_mock_data_for_day(num_records, date_str, bucket_name):
-    filename = f"transactions_{date_str}.csv"
+    filename = f"/tmp/transactions_{date_str}.csv"
     with open(filename, 'w', newline='') as csvfile:
         fieldnames = ['customer_id', 'name', 'debit_card_number', 'debit_card_type', 'bank_name', 'transaction_date', 'amount_spend']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -37,7 +37,7 @@ def generate_mock_data_for_day(num_records, date_str, bucket_name):
             })
     
     # Upload the file to S3 with Hive-like partitioning
-    s3_key = f"tmp/transactions/date={date_str}/{filename}"
+    s3_key = f"transactions/date={date_str}/{filename}"
     source_s3_bucket = "customer-debit-card-purchase-source-data"
     s3_client.upload_file(filename, source_s3_bucket, s3_key)
     
