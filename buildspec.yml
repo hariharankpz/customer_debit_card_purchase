@@ -12,7 +12,7 @@ phases:
       - cd lib
       - zip -r9 ../deployment_package_debit_card.zip .
       - cd ..
-      - zip -g deployment_package_debit_card.zip mock_data_generator.py
+      - zip -g deployment_package_debit_card.zip *.py
   post_build:
     commands:
       - echo "Uploading to S3..."

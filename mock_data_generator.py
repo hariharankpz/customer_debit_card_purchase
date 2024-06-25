@@ -83,16 +83,16 @@ def lambda_handler(event, context):
 
     print("Updated last generated data")
 
-    # Connect to RDS, create customers database and customer_transactions table
-    # try:
-    #     connect_and_create_db()
-    # except Exception as e:
-    #     print("Exception occurs while connect_and_create_db :",str(e))
+    # Connect to RDS, create customers database and customer_transactions table - mysql-aws-de-db
+    try:
+        connect_and_create_db()
+    except Exception as e:
+        print("Exception occurs while connect_and_create_db :",str(e))
     
-    # return {
-    #     'statusCode': 200,
-    #     'body': f'Mock data for {date_str} generated and uploaded to S3 successfully'
-    # }
+    return {
+        'statusCode': 200,
+        'body': f'Mock data for {date_str} generated and uploaded to S3 successfully'
+    }
 
 # # Example event and context for local testing
 # if __name__ == "__main__":

@@ -5,7 +5,7 @@ import json
 
 # Initialize a Secrets Manager client
 client = boto3.client('secretsmanager', region_name='us-east-1')
-secret_name = 'mysql-rds-class5-creds'
+secret_name = 'mysql-dev-db-creds'
 
 
 def get_rds_credentials(secret_name):
@@ -38,13 +38,14 @@ def connect_and_create_db():
             print("Fecthed RDS Credentials:")
             username = credentials['username']
             password = credentials['password']
+            print("Credentials dict :", credentials)
             # Depending on how you've structured your secret, you might need
             # to adjust the keys (e.g., 'username' and 'password') accordingly.
         else:
             print("Failed to fetch credentials.")
 
         connection = mysql.connector.connect(
-            host='mysql-aws-de-db-class5.cdcokcumq4ck.us-east-1.rds.amazonaws.com',
+            host='mysql-aws-de-db.cf8smy20actd.us-east-1.rds.amazonaws.com',
             port=3306,
             user=username,
             password=password
