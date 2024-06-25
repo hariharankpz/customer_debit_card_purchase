@@ -62,7 +62,7 @@ def update_last_generated_date(bucket_name, metadata_key, date):
 def lambda_handler(event, context):
     bucket_name = 'hh-s3-datalake-gds'
     metadata_key = 'last_generated_date.txt'
-    num_records_per_day = 100
+    num_records_per_day = 10
     
     # Get the last generated date
     last_date = get_last_generated_date(bucket_name, metadata_key)
