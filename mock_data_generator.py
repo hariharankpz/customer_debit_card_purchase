@@ -37,7 +37,7 @@ def generate_mock_data_for_day(num_records, date_str, bucket_name):
             })
     
     # Upload the file to S3 with Hive-like partitioning
-    new_file_name = "transactions_{date_str}.csv"
+    new_file_name = f"transactions_{date_str}.csv"
     s3_key = f"transactions/date={date_str}/{new_file_name}"
     source_s3_bucket = "customer-debit-card-purchase-source-data"
     s3_client.upload_file(filename, source_s3_bucket, s3_key)
